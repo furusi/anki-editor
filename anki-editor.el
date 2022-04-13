@@ -568,16 +568,18 @@ Where the subtree is created depends on PREFIX."
 
             (push (cons field-name
                         (cond
-                         ((and contents-begin contents-end) (or (org-export-string-as
-                                                                 (buffer-substring
-                                                                  contents-begin
-                                                                  ;; in case the buffer is narrowed,
-                                                                  ;; e.g. by `org-map-entries' when
-                                                                  ;; scope is `tree'
-                                                                  (min (point-max) contents-end))
-                                                                 anki-editor--ox-anki-html-backend
-                                                                 t
-                                                                 anki-editor--ox-export-ext-plist)
+                         ((and contents-begin contents-end) (or (replace-regexp-in-string
+                                                                 "\n$" ""
+                                                                 (org-export-string-as
+                                                                  (buffer-substring
+                                                                   contents-begin
+                                                                   ;; in case the buffer is narrowed,
+                                                                   ;; e.g. by `org-map-entries' when
+                                                                   ;; scope is `tree'
+                                                                   (min (point-max) contents-end))
+                                                                  anki-editor--ox-anki-html-backend
+                                                                  t
+                                                                  anki-editor--ox-export-ext-plist))
 
                                                                 ;; 8.2.10 version of
                                                                 ;; `org-export-filter-apply-functions'
